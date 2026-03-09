@@ -1,0 +1,224 @@
+/* navbar + mobile menu */
+
+.header {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    transition: var(--transition);
+    pointer-events: none;
+    /* clicks pass through to content behind */
+}
+
+/* mobile - keep the pill but snug to edges */
+@media (max-width: 768px) {
+    .header {
+        top: 15px;
+        padding: 0 15px;
+        display: block;
+    }
+}
+
+/* state when scrolling down */
+.header.scrolled {
+    top: 10px;
+}
+
+/* shrink the pill slightly */
+.header.scrolled .nav-container {
+    padding: 6px 15px 6px 25px;
+    background-color: rgba(159, 158, 153, 0.25);
+    /* Slightly darker, more focused */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.header.scrolled .logo img {
+    height: 40px;
+}
+
+/* the actual pill container */
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(159, 158, 153, 0.25);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 20px 10px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 1100px;
+    pointer-events: auto;
+}
+
+/* desktop layout: links | logo | action btn */
+#navbar {
+    flex: 1;
+}
+
+.logo {
+    flex: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+    display: block;
+}
+
+.nav-actions {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+    font-weight: 500;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: var(--black);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.nav-links a:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.nav-links a.active {
+    color: var(--white);
+    font-weight: 700;
+}
+
+/* enroll btn in the nav */
+.nav-actions .btn-outline {
+    background-color: #6a8065;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+.nav-actions .btn-outline:hover {
+    background-color: #5b6f56;
+    color: white;
+}
+
+/* hamburger icon - hidden on desktop */
+.mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--white);
+    border-radius: 3px;
+    transition: var(--transition);
+}
+
+/* X animation when menu is open */
+.mobile-menu-btn.active span {
+    background-color: var(--white);
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+}
+
+
+/* mobile overrides */
+@media (max-width: 768px) {
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .nav-container {
+        padding: 12px 18px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    #navbar {
+        display: flex;
+        flex: 0 0 100%;
+        /* own row */
+        order: 3;
+    }
+
+    .logo {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        order: 1;
+    }
+
+    .nav-actions {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        order: 2;
+    }
+
+    /* dropdown panel instead of sidebar */
+    .nav-links {
+        position: static;
+        width: 100%;
+        max-width: none;
+        height: 0;
+        overflow: hidden;
+        background-color: transparent;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        box-shadow: none;
+        padding: 0;
+        transition: height 0.4s ease-in-out, padding 0.4s ease-in-out;
+        z-index: 1050;
+    }
+
+    .nav-links.active {
+        height: 240px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .nav-links li a {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+}

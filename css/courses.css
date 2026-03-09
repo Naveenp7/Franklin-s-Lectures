@@ -1,0 +1,128 @@
+/* course list styling */
+
+.courses-section {
+    padding: 80px 0;
+}
+
+.courses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.course-card {
+    border: 1px solid #E2E8F0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+.course-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+
+}
+
+.course-img {
+    height: 200px;
+    background-color: #CBD5E1;
+    position: relative;
+}
+
+.course-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* time badge overlay on image */
+.course-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--white);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.course-badge.popular {
+    background: var(--primary-yellow);
+}
+
+.course-content {
+    padding: 24px;
+}
+
+.course-rating {
+    color: #F59E0B;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.course-rating span {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.course-content h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+}
+
+.course-content p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+}
+
+/* bottom row of card */
+.course-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.course-price {
+    font-weight: 800;
+    font-size: 1.25rem;
+}
+
+.enroll-link {
+    color: var(--primary-yellow);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* tablet + mobile fixes */
+@media (max-width: 992px) {
+    .course-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .courses-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+}

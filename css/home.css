@@ -1,0 +1,276 @@
+/* hero + category cards */
+
+.hero {
+    /* grid lines overlay + yellow-to-white gradient */
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom,
+            var(--primary-yellow) 0%,
+            var(--primary-yellow) 65%,
+            rgba(255, 255, 255, 0.2) 85%,
+            #ffffff 100%);
+    background-size: 40px 40px, 40px 40px, 100% 100%;
+    text-align: center;
+    padding: 140px 0 0 0;
+    position: relative;
+    overflow: hidden;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+}
+
+.hero h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    opacity: 0; /* Hidden initially for animation */
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 30px;
+    opacity: 0; /* Hidden initially for animation */
+}
+
+/* Dynamic Typing Text */
+.dynamic-text {
+    font-weight: 700;
+    color: var(--primary-blue);
+    position: relative;
+    display: inline-block;
+}
+
+.dynamic-text::after {
+    content: '|';
+    position: absolute;
+    right: -8px;
+    color: var(--primary-blue);
+    animation: blinkCursor 0.7s infinite;
+}
+
+@keyframes blinkCursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.hero-image-container {
+    position: relative;
+    max-width: 650px;
+    margin: 0 auto;
+    opacity: 0; /* Hidden initially for animation */
+}
+
+/* --- Hero Entrance Animations --- */
+@keyframes heroTextSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heroImageScaleUp {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Trigger animations only when preloader is gone */
+body:not(.loading) .hero h1 {
+    animation: heroTextSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+body:not(.loading) .hero p {
+    animation: heroTextSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-delay: 0.15s;
+}
+
+body:not(.loading) .hero-image-container {
+    animation: heroImageScaleUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    animation-delay: 0.3s;
+}
+
+/* soft glow behind team photo */
+.hero-image-container::before {
+    content: '';
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    width: 140%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0) 65%);
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-image-container img {
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+
+/* fade into the white section below */
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+
+/* course category flip cards */
+
+.course-categories {
+    width: 100%;
+    padding: 60px 0;
+    text-align: center;
+    background: var(--white);
+}
+
+.category-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.category-card {
+    background: transparent;
+    perspective: 1000px;
+    width: 240px;
+    height: 140px;
+    cursor: pointer;
+}
+
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    top: 0;
+    left: 0;
+}
+
+.card-front {
+    background: var(--white);
+    color: var(--text-dark);
+    font-weight: 800;
+    font-size: 1.25rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.card-front .icon {
+    font-size: 1.6rem;
+    color: var(--primary-yellow);
+    margin-bottom: 8px;
+    z-index: 1; /* Keep above decorative circle */
+}
+
+/* Decorative background circle (before hover) */
+.card-front::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 222, 0, 0.1);
+    border-radius: 50%;
+    transition: transform 0.5s ease, background 0.5s ease;
+}
+
+/* Decorative bottom accent line */
+.card-front::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30%;
+    height: 4px;
+    background: #E2E8F0;
+    transition: width 0.5s ease, background 0.5s ease;
+}
+
+/* Enhance accents while hovering */
+.category-card:hover .card-front::before {
+    transform: scale(1.5);
+    background: rgba(255, 222, 0, 0.3);
+}
+
+.category-card:hover .card-front::after {
+    width: 100%;
+    background: var(--primary-yellow);
+}
+
+.card-back {
+    background: var(--primary-yellow);
+    color: var(--text-dark);
+    transform: rotateY(180deg);
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+
+/* responsive tweaks */
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .category-card {
+        width: 100%;
+        max-width: 320px;
+        height: 120px;
+        margin: 0 auto;
+    }
+}

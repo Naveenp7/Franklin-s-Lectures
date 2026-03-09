@@ -1,0 +1,124 @@
+/* latest yt vids section */
+
+.youtube-section {
+    padding: 100px 0;
+    background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+}
+
+.youtube-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.youtube-header p {
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.youtube-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.youtube-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #eef2f6;
+    transition: var(--transition);
+}
+
+.youtube-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* 16:9 intrinsic ratio hack for iframe */
+.youtube-card .video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    background: #000;
+}
+
+.youtube-card .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.youtube-card .video-info {
+    padding: 20px 24px;
+}
+
+/* limit title to 2 lines */
+.youtube-card .video-info h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--dark-navy);
+    margin-bottom: 8px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.youtube-card .video-info span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.youtube-subscribe {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* red yt button styling */
+.btn-youtube {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #FF0000;
+    color: white;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+}
+
+.btn-youtube:hover {
+    background: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 0, 0, 0.25);
+    color: white;
+}
+
+.btn-youtube i {
+    font-size: 1.3rem;
+}
+
+
+@media (max-width: 992px) {
+    .youtube-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .youtube-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .youtube-section {
+        padding: 60px 0;
+    }
+}
